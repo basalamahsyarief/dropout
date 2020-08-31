@@ -23,4 +23,5 @@ class DropOut:
         input = np.array(input)
         input[1] = self.scaler.transform(input[1].reshape(1,-1))[0][0]
         result = self.model.predict(input.reshape(1,-1))
-        return {'result' : result[0]}
+        proba = max(self.model.predict_proba(input.reshape(1,-1))[0])
+        return {'result' : result[0], 'probability' : proba}
